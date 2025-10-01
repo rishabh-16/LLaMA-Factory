@@ -415,14 +415,14 @@ class ReasoningTemplate(Template):
             messages[-1]["content"] = self.remove_thought(messages[-1]["content"])
 
         prompt_ids, response_ids = super().encode_oneturn(tokenizer, messages, system, tools)
-        if (
-            self.thought_words[0] not in messages[-1]["content"]
-            and self.thought_words[1] not in messages[-1]["content"]
-        ):  # add empty cot
-            if not self.enable_thinking:  # do not compute loss
-                prompt_ids += self.get_thought_word_ids(tokenizer)
-            else:  # do compute loss
-                response_ids = self.get_thought_word_ids(tokenizer) + response_ids
+        # if (
+        #     self.thought_words[0] not in messages[-1]["content"]
+        #     and self.thought_words[1] not in messages[-1]["content"]
+        # ):  # add empty cot
+        #     if not self.enable_thinking:  # do not compute loss
+        #         prompt_ids += self.get_thought_word_ids(tokenizer)
+        #     else:  # do compute loss
+        #         response_ids = self.get_thought_word_ids(tokenizer) + response_ids
 
         return prompt_ids, response_ids
 
@@ -440,15 +440,15 @@ class ReasoningTemplate(Template):
                 messages[i]["content"] = self.remove_thought(messages[i]["content"])
 
         encoded_messages = self._encode(tokenizer, messages, system, tools)
-        for i in range(0, len(messages), 2):
-            if (
-                self.thought_words[0] not in messages[i + 1]["content"]
-                and self.thought_words[1] not in messages[i + 1]["content"]
-            ):  # add empty cot
-                if not self.enable_thinking:  # do not compute loss
-                    encoded_messages[i] += self.get_thought_word_ids(tokenizer)
-                else:  # do compute loss
-                    encoded_messages[i + 1] = self.get_thought_word_ids(tokenizer) + encoded_messages[i + 1]
+        # for i in range(0, len(messages), 2):
+        #     if (
+        #         self.thought_words[0] not in messages[i + 1]["content"]
+        #         and self.thought_words[1] not in messages[i + 1]["content"]
+        #     ):  # add empty cot
+        #         if not self.enable_thinking:  # do not compute loss
+        #             encoded_messages[i] += self.get_thought_word_ids(tokenizer)
+        #         else:  # do compute loss
+        #             encoded_messages[i + 1] = self.get_thought_word_ids(tokenizer) + encoded_messages[i + 1]
 
         return [(encoded_messages[i], encoded_messages[i + 1]) for i in range(0, len(encoded_messages), 2)]
 
