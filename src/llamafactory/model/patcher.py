@@ -110,6 +110,11 @@ def patch_config(
     configure_visual_model(config)
     configure_packing(model_args, is_trainable)
     configure_kv_cache(config, model_args, is_trainable)
+    
+    # Override num_experts_per_tok if specified in training config
+    if model_args.num_experts_per_tok is not None:
+        print(f"Overriding num_experts_per_tok in the config to: {model_args.num_experts_per_tok}")
+        setattr(config, "num_experts_per_tok", model_args.num_experts_per_tok)
 
     if getattr(config, "model_type", None) == "qwen":
         setattr(config, "use_flash_attn", model_args.flash_attn == "fa2")

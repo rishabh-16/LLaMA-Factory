@@ -1761,6 +1761,21 @@ register_template(
     template_class=ReasoningTemplate,
 )
 
+register_template(
+    name="ling",
+    format_user=StringFormatter(slots=["<role>HUMAN</role>{{content}}<role>ASSISTANT</role>"]),
+    format_assistant=StringFormatter(slots=["{{content}}<|endoftext|>"]),
+    format_system=StringFormatter(slots=["<role>SYSTEM</role>{{content}}"]),
+    format_function=FunctionFormatter(slots=["{{content}}"], tool_format="qwen"),
+    format_observation=StringFormatter(
+        slots=["<|im_start|>user\n<tool_response>\n{{content}}\n</tool_response><|im_end|>\n<|im_start|>assistant\n"]
+    ),
+    format_tools=ToolFormatter(tool_format="qwen"),
+    stop_words=["<|endoftext|>"],
+    replace_eos=True,
+    template_class=ReasoningTemplate,
+)
+
 
 # copied from qwen template
 register_template(

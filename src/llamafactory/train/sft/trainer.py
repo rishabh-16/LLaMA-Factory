@@ -105,7 +105,20 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
 
     @override
     def compute_loss(self, model, inputs, *args, **kwargs):
-        return super().compute_loss(model, inputs, *args, **kwargs)
+        loss = super().compute_loss(model, inputs, *args, **kwargs)
+        
+        # # DEBUG: Print loss value used for gradient computation
+        # if self.state.global_step % self.args.logging_steps == 0:
+        #     import torch.distributed as dist
+        #     if dist.is_initialized():
+        #         rank = dist.get_rank()
+        #         world_size = dist.get_world_size()
+        #         print(f"[DEBUG Rank {rank}/{world_size}] compute_loss step {self.state.global_step}: "
+        #               f"loss={loss.item():.4f}, loss_device={loss.device}")
+        #     else:
+        #         print(f"[DEBUG] compute_loss step {self.state.global_step}: loss={loss.item():.4f}")
+        
+        return loss
 
     @override
     def prediction_step(

@@ -362,6 +362,20 @@
       "system_tag": "system"
     }
   },
+  "numinamath": {
+    "hf_hub_url": "/home/rishabhtiwari/datasets/numinamath",
+    "split": "train",
+    "formatting": "sharegpt",
+    "columns": {
+      "messages": "messages"
+    },
+    "tags": {
+      "role_tag": "role",
+      "content_tag": "content",
+      "user_tag": "user",
+      "assistant_tag": "assistant"
+    }
+  },
   "open_r1_math": {
     "hf_hub_url": "llamafactory/OpenR1-Math-94k",
     "formatting": "sharegpt",

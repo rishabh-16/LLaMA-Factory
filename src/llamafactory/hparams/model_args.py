@@ -115,6 +115,10 @@ class BaseModelArguments:
         default=None,
         metadata={"help": "Coefficient of the auxiliary router loss in mixture-of-experts model."},
     )
+    num_experts_per_tok: Optional[int] = field(
+        default=None,
+        metadata={"help": "Number of experts to use per token in mixture-of-experts model."},
+    )
     disable_gradient_checkpointing: bool = field(
         default=False,
         metadata={"help": "Whether or not to disable gradient checkpointing."},
