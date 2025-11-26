@@ -362,6 +362,20 @@
       "system_tag": "system"
     }
   },
+  "open_thoughts_3_small": {
+    "hf_hub_url": "/home/rishabhtiwari/datasets/openthoughts3_small",
+    "formatting": "sharegpt",
+    "columns": {
+      "messages": "conversations"
+    },
+    "tags": {
+      "role_tag": "from",
+      "content_tag": "value",
+      "user_tag": "human",
+      "assistant_tag": "gpt",
+      "system_tag": "system"
+    }
+  },
   "numinamath": {
     "hf_hub_url": "/home/rishabhtiwari/datasets/numinamath",
     "split": "train",
